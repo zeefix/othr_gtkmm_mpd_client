@@ -43,7 +43,7 @@ std::vector<SongInfo> LibmpdHelper::getMusicDirectoryContents()
     auto connection = mpd_connection_new("localhost", 6600, 0);
     std::vector<SongInfo> songsInfo;
 
-    if (mpd_send_list_files(connection, ""))
+    if (mpd_send_list_all(connection, ""))
     {
 
         mpd_entity *entity;

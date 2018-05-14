@@ -67,18 +67,18 @@ void GraphicalUserInterface::bindGladeWidgetsToVariables(Glib::RefPtr<Gtk::Build
  */
 void GraphicalUserInterface::bindWidgetSignalsToHandlers(SignalHandler signalHandler)
 {
-    buttonStop->signal_clicked().connect(sigc::mem_fun(signalHandler, SignalHandler::stopMpd));
-    buttonPlay->signal_clicked().connect(sigc::mem_fun(signalHandler, SignalHandler::playMpd));
-    buttonPause->signal_clicked().connect(sigc::mem_fun(signalHandler, SignalHandler::pauseMpd));
-    buttonPrevious->signal_clicked().connect(sigc::mem_fun(signalHandler, SignalHandler::previousSong));
-    buttonNext->signal_clicked().connect(sigc::mem_fun(signalHandler, SignalHandler::nextSong));
+    buttonStop->signal_clicked().connect(sigc::mem_fun(signalHandler, &SignalHandler::stopMpd));
+    buttonPlay->signal_clicked().connect(sigc::mem_fun(signalHandler, &SignalHandler::playMpd));
+    buttonPause->signal_clicked().connect(sigc::mem_fun(signalHandler, &SignalHandler::pauseMpd));
+    buttonPrevious->signal_clicked().connect(sigc::mem_fun(signalHandler, &SignalHandler::previousSong));
+    buttonNext->signal_clicked().connect(sigc::mem_fun(signalHandler, &SignalHandler::nextSong));
 
-    buttonRemoveFromPlaylist->signal_clicked().connect(sigc::mem_fun(this, GraphicalUserInterface::removeSelectedSongFromPlaylist));
-    buttonAddToPlaylist->signal_clicked().connect(sigc::mem_fun(this, GraphicalUserInterface::addSelectedSongFromLibraryToPlaylist));
+    buttonRemoveFromPlaylist->signal_clicked().connect(sigc::mem_fun(this, &GraphicalUserInterface::removeSelectedSongFromPlaylist));
+    buttonAddToPlaylist->signal_clicked().connect(sigc::mem_fun(this, &GraphicalUserInterface::addSelectedSongFromLibraryToPlaylist));
 
     // Volume parameter muss nicht explizit in mem_fun oder bind angegeben werden, da er in signal_value_changed implizit mituebergeben wird.
     // Er kann in der angegebenen Methode einfach als const double angenommen werden.
-    buttonVolume->signal_value_changed().connect(sigc::mem_fun(signalHandler, SignalHandler::changeVolume));
+    buttonVolume->signal_value_changed().connect(sigc::mem_fun(signalHandler, &SignalHandler::changeVolume));
 }
 
 /**
