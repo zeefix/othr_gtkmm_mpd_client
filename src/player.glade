@@ -241,6 +241,19 @@
               </packing>
             </child>
             <child>
+              <object class="GtkToggleButton" id="button_microphone">
+                <property name="label" translatable="yes">mic</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">5</property>
+              </packing>
+            </child>
+            <child>
               <object class="GtkVolumeButton" id="button_volume">
                 <property name="label" translatable="yes">volume</property>
                 <property name="visible">True</property>
@@ -259,7 +272,7 @@ audio-volume-medium</property>
               <packing>
                 <property name="expand">True</property>
                 <property name="fill">True</property>
-                <property name="position">5</property>
+                <property name="position">6</property>
               </packing>
             </child>
           </object>
