@@ -3,7 +3,7 @@
 #include <gtkmm.h>
 #include <mpd/client.h>
 
-#include "graphical_user_interface.hh"
+#include "viewmodels/graphical_user_interface.hh"
 
 int main(int argc, char **argv)
 {

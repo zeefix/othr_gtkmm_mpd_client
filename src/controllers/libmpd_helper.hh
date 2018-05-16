@@ -4,7 +4,7 @@
 
 #include <mpd/client.h>
 
-#include "song_info.hh"
+#include "../models/song_info.hh"
 
 namespace Othr
 {

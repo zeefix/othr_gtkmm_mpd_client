@@ -1,5 +1,4 @@
 #include <gtkmm.h>
-#include "libmpd_helper.hh"
 
 namespace Othr
 {

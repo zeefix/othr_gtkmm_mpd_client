@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0)
 
 file(GLOB_RECURSE source *.cc *.hh *.glade)
 
-configure_file(player.glade player.glade COPYONLY)
+configure_file(views/player.glade player.glade COPYONLY)
 
 link_directories(
     ${GTKMM_LIBRARY_DIRS}
