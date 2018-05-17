@@ -5,51 +5,69 @@
 #include "../controllers/libmpd_helper.hh"
 #include "songlist_columns.hh"
 
-namespace Othr {
+namespace Othr
+{
 
 /**
  * The Viewmodel for the music player.
  * Contains all widgets that are needed for basic playback controls.
  */
-    class GraphicalUserInterface {
-    private:
-        Gtk::Window *mainWindow;
-        Gtk::Button *buttonAddToPlaylist;
-        Gtk::ToggleButton *buttonMicrophone;
-        Gtk::Button *buttonNext;
-        Gtk::Button *buttonPause;
-        Gtk::Button *buttonPlay;
-        Gtk::Button *buttonPrevious;
-        Gtk::Button *buttonRemoveFromPlaylist;
-        Gtk::Button *buttonStop;
-        Gtk::VolumeButton *buttonVolume;
-        Gtk::ProgressBar *progressBar;
-        Gtk::TreeView *treeviewPlaylist;
-        Gtk::TreeView *treeviewLibrary;
+class GraphicalUserInterface
+{
+private:
+  Gtk::Window *mainWindow;
 
-        SonglistColumns playlistModel;
-        SonglistColumns libraryModel;
+  Gtk::Button *buttonAddToPlaylist;
+  Gtk::Button *buttonNext;
+  Gtk::Button *buttonPause;
+  Gtk::Button *buttonPlay;
+  Gtk::Button *buttonPrevious;
+  Gtk::Button *buttonRemoveFromPlaylist;
+  Gtk::Button *buttonStop;
+  Gtk::VolumeButton *buttonVolume;
 
-        Glib::RefPtr<Gtk::ListStore> liststorePlaylist;
-        Glib::RefPtr<Gtk::ListStore> liststoreLibrary;
+  Gtk::ToggleButton *buttonMicrophone;
 
-    public:
-        GraphicalUserInterface(Glib::RefPtr<Gtk::Builder> refBuilder, SignalHandler signalHandler);
+  Gtk::ProgressBar *progressBar;
+  Gtk::TreeView *treeviewPlaylist;
+  Gtk::TreeView *treeviewLibrary;
 
-        void addSelectedSongFromLibraryToPlaylist();
+  SonglistColumns playlistModel;
+  SonglistColumns libraryModel;
 
-        void bindGladeWidgetsToVariables(Glib::RefPtr<Gtk::Builder> refBuilder);
+  Glib::RefPtr<Gtk::ListStore> liststorePlaylist;
+  Glib::RefPtr<Gtk::ListStore> liststoreLibrary;
 
-        void bindWidgetSignalsToHandlers(SignalHandler signalHandler);
+  SignalHandler signalHandler;
+  LibmpdHelper libmpdHelper;
 
-        void createUnbindableWidgets();
+public:
+  GraphicalUserInterface(Glib::RefPtr<Gtk::Builder> refBuilder, SignalHandler signalHandler, LibmpdHelper libmpdHelper);
 
-        void microphoneClicked();
+  void addSelectedSongFromLibraryToPlaylist();
 
-        void refreshDisplayedLibrary();
+  void bindGladeWidgetsToVariables(Glib::RefPtr<Gtk::Builder> refBuilder);
 
-        void refreshDisplayedPlaylist();
+  void bindWidgetSignalsToHandlers();
 
-        void removeSelectedSongFromPlaylist();
-    };
-}
+  void createUnbindableWidgets();
+
+  void displayCurrentSongInWindowTitle();
+
+  void microphoneClicked();
+
+  void nextSong();
+
+  void playMpd();
+
+  void previousSong();
+
+  void refreshDisplayedLibrary();
+
+  void refreshDisplayedPlaylist();
+
+  void removeSelectedSongFromPlaylist();
+
+  void stopMpd();
+};
+} // namespace Othr

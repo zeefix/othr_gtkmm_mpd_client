@@ -17,5 +17,6 @@ class LibmpdHelper
 public:
   std::vector<SongInfo> getCurrentPlaylist();
   std::vector<SongInfo> getMusicDirectoryContents();
+  SongInfo getCurrentSong();
 };
 }

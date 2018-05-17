@@ -36,6 +36,30 @@ std::vector<SongInfo> LibmpdHelper::getCurrentPlaylist()
 }
 
 /**
+ * Fetches the current playlist by sending a "send" request to the mpd server, and then iterating over the received songs to extract their relevant information into an easily usable format.
+ */
+SongInfo LibmpdHelper::getCurrentSong()
+{
+    auto connection = mpd_connection_new("localhost", 6600, 0);
+
+    SongInfo currentSongInfo;
+
+    if (auto currentMpdSong = mpd_run_current_song(connection))
+    {
+        currentSongInfo.uri = mpd_song_get_uri(currentMpdSong);
+        currentSongInfo.position = mpd_song_get_pos(currentMpdSong);
+        currentSongInfo.id = mpd_song_get_id(currentMpdSong);
+
+        mpd_song_free(currentMpdSong);
+    }
+
+    mpd_response_finish(connection);
+    mpd_connection_free(connection);
+
+    return currentSongInfo;
+}
+
+/**
  * Fetches the current contents of the mpd music directory by sending a "send" request to the mpd server, and then iterating over the received entities to extract their relevant information into an easily usable format.
  */
 std::vector<SongInfo> LibmpdHelper::getMusicDirectoryContents()
@@ -79,4 +103,4 @@ std::vector<SongInfo> LibmpdHelper::getMusicDirectoryContents()
 
     return songsInfo;
 }
-}
+} // namespace Othr
