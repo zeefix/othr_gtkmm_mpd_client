@@ -241,7 +241,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkToggleButton" id="button_microphone">
+              <object class="GtkButton" id="button_microphone">
                 <property name="label" translatable="yes">mic</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>

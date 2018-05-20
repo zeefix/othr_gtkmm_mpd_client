@@ -32,7 +32,8 @@ int main(int argc, char **argv)
 
     Othr::SignalHandler signalHandler;
     Othr::LibmpdHelper libmpdHelper;
-    Othr::GraphicalUserInterface gui(refBuilder, signalHandler, libmpdHelper);
+    Othr::VoiceController voiceController;
+    Othr::GraphicalUserInterface gui(refBuilder, signalHandler, libmpdHelper, voiceController);
     Gtk::Window *mainWindow;
     refBuilder->get_widget("window_main", mainWindow);
 

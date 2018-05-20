@@ -3,8 +3,8 @@
 namespace Othr
 {
 
-GraphicalUserInterface::GraphicalUserInterface(Glib::RefPtr<Gtk::Builder> refBuilder, SignalHandler signalHandler, LibmpdHelper libmpdHelper)
-    : signalHandler(signalHandler), libmpdHelper(libmpdHelper)
+GraphicalUserInterface::GraphicalUserInterface(Glib::RefPtr<Gtk::Builder> refBuilder, SignalHandler signalHandler, LibmpdHelper libmpdHelper, VoiceController voice)
+    : signalHandler(signalHandler), libmpdHelper(libmpdHelper), voice(voice)
 {
     refBuilder->add_from_file("player.glade");
     bindGladeWidgetsToVariables(refBuilder);
@@ -78,7 +78,7 @@ void GraphicalUserInterface::bindWidgetSignalsToHandlers()
     buttonPrevious->signal_clicked().connect(sigc::mem_fun(this, &GraphicalUserInterface::previousSong));
     buttonNext->signal_clicked().connect(sigc::mem_fun(this, &GraphicalUserInterface::nextSong));
 
-    buttonMicrophone->signal_clicked().connect(sigc::mem_fun(this, &GraphicalUserInterface::microphoneClicked));
+    buttonMicrophone->signal_clicked().connect(sigc::mem_fun(voice, &VoiceController::listen));
     buttonRemoveFromPlaylist->signal_clicked().connect(
         sigc::mem_fun(this, &GraphicalUserInterface::removeSelectedSongFromPlaylist));
     buttonAddToPlaylist->signal_clicked().connect(
@@ -119,20 +119,6 @@ void GraphicalUserInterface::displayCurrentSongInWindowTitle()
 
     Glib::ustring songTitle = Glib::ustring(currentSong.uri);
     mainWindow->set_title(songTitle + "[Othr Gtkmm Player]");
-}
-
-void GraphicalUserInterface::microphoneClicked()
-{
-    bool micIsListening = buttonMicrophone->get_active();
-
-    if (micIsListening)
-    {
-        std::cout << "Mic is listening" << std::endl;
-    }
-    else
-    {
-        std::cout << "Mic is off" << std::endl;
-    }
 }
 
 void GraphicalUserInterface::nextSong()

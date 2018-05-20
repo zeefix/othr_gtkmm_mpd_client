@@ -3,6 +3,7 @@
 #include <iostream>
 #include "../controllers/signal_handler.hh"
 #include "../controllers/libmpd_helper.hh"
+#include "../controllers/voice_controller.hh"
 #include "songlist_columns.hh"
 
 namespace Othr
@@ -18,6 +19,7 @@ private:
   Gtk::Window *mainWindow;
 
   Gtk::Button *buttonAddToPlaylist;
+  Gtk::Button *buttonMicrophone;
   Gtk::Button *buttonNext;
   Gtk::Button *buttonPause;
   Gtk::Button *buttonPlay;
@@ -25,8 +27,6 @@ private:
   Gtk::Button *buttonRemoveFromPlaylist;
   Gtk::Button *buttonStop;
   Gtk::VolumeButton *buttonVolume;
-
-  Gtk::ToggleButton *buttonMicrophone;
 
   Gtk::ProgressBar *progressBar;
   Gtk::TreeView *treeviewPlaylist;
@@ -40,9 +40,10 @@ private:
 
   SignalHandler signalHandler;
   LibmpdHelper libmpdHelper;
+  VoiceController voice;
 
 public:
-  GraphicalUserInterface(Glib::RefPtr<Gtk::Builder> refBuilder, SignalHandler signalHandler, LibmpdHelper libmpdHelper);
+  GraphicalUserInterface(Glib::RefPtr<Gtk::Builder> refBuilder, SignalHandler signalHandler, LibmpdHelper libmpdHelper, VoiceController voice);
 
   void addSelectedSongFromLibraryToPlaylist();
 
