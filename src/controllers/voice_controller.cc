@@ -9,7 +9,7 @@ VoiceController::VoiceController() {}
  */
 void VoiceController::listen()
 {
-	char filename[] = "speech_processing/main.py";
+	char filename[] = "natural_language_interface/main.py";
 	FILE *fp;
 	wchar_t *program = Py_DecodeLocale("main.py", NULL);
 

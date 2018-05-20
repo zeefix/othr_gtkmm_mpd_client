@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.0)
 file(GLOB_RECURSE source *.cc *.hh *.glade)
 
 configure_file(views/player.glade player.glade COPYONLY)
-file(COPY other_modules/speech_processing DESTINATION ./)
+file(COPY other_modules/natural_language_interface DESTINATION ./)
 
 link_directories(
     ${GTKMM_LIBRARY_DIRS}
