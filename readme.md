@@ -19,7 +19,8 @@ Also contains an experimental natural language interface, which was forked from 
 * mpd (or else this client would be pretty useless):
     * Easy: get the `mpd` package with the package manager of your choice
     * Hard: download and build the source files from the [musicpd.org website](https://www.musicpd.org/download/mpd/ "mpd download section")
-* python3 (NOT python!)
+* python: download and install the `python3` and `python3-dev` packages
+* flask: download and install Flask with Python's package manager: `pip3 install flask`
 * all dependencies listed in `[project_root]/src/other_modules/speech_processing/README.md`
 
 ### Steps
