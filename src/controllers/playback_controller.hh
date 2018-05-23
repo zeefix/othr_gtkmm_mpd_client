@@ -1,3 +1,6 @@
+#ifndef ANOTHR_PLAYBACK_CONTROLLER_H
+#define ANOTHR_PLAYBACK_CONTROLLER_H
+
 namespace anothr
 {
 
@@ -13,4 +16,6 @@ public:
   void removeSongFromPlaylistAtPosition(int position);
   void stopMpd();
 };
-}
+} // namespace anothr
+
+#endif

@@ -6,6 +6,9 @@
 
 #include "songlist_columns.hh"
 
+#ifndef ANOTHR_GRAPHICAL_USER_INTERFACE_H
+#define ANOTHR_GRAPHICAL_USER_INTERFACE_H
+
 namespace anothr
 {
 
@@ -72,3 +75,5 @@ public:
   void stopMpd();
 };
 } // namespace anothr
+
+#endif

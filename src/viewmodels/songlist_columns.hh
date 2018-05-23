@@ -1,5 +1,8 @@
 #include <gtkmm.h>
 
+#ifndef ANOTHR_SONGLIST_COLUMNS_H
+#define ANOTHR_SONGLIST_COLUMNS_H
+
 namespace anothr
 {
 
@@ -17,4 +20,6 @@ public:
   Gtk::TreeModelColumn<int> songId;
   Gtk::TreeModelColumn<Glib::ustring> songTitle;
 };
-}
+} // namespace anothr
+
+#endif

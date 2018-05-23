@@ -1,5 +1,8 @@
 #include <gtkmm.h>
 
+#ifndef ANOTHR_SONG_INFO_H
+#define ANOTHR_SONG_INFO_H
+
 namespace anothr
 {
 
@@ -19,3 +22,5 @@ public:
   unsigned int id;
 };
 } // namespace anothr
+
+#endif

@@ -4,6 +4,9 @@
 
 #include "../models/song_info.hh"
 
+#ifndef ANOTHR_REFRESH_CONTROLLER_H
+#define ANOTHR_REFRESH_CONTROLLER_H
+
 namespace anothr
 {
 
@@ -17,4 +20,6 @@ public:
   std::vector<SongInfo> getMusicDirectoryContents();
   SongInfo getCurrentSong();
 };
-}
+} // namespace anothr
+
+#endif
