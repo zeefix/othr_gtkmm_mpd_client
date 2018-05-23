@@ -3,8 +3,8 @@
 namespace Othr
 {
 
-GraphicalUserInterface::GraphicalUserInterface(Glib::RefPtr<Gtk::Builder> refBuilder, MpdPlaybackController playback, RefreshController refreshController, VoiceController voice)
-    : playback(playback), refreshController(refreshController), voice(voice)
+GraphicalUserInterface::GraphicalUserInterface(Glib::RefPtr<Gtk::Builder> refBuilder, PlaybackController playbackController, RefreshController refreshController, VoiceController voiceController)
+    : playbackController(playbackController), refreshController(refreshController), voiceController(voiceController)
 {
     refBuilder->add_from_file("player.glade");
     bindGladeWidgetsToVariables(refBuilder);
@@ -35,7 +35,7 @@ void GraphicalUserInterface::addSelectedSongFromLibraryToPlaylist()
         Glib::ustring songTitleUstring = row[playlistModel.songTitle];
         const char *SongTitleCharpointer = songTitleUstring.c_str();
 
-        playback.addSongToPlaylistWithTitle(SongTitleCharpointer);
+        playbackController.addSongToPlaylistWithTitle(SongTitleCharpointer);
         refreshDisplayedPlaylist();
     }
     else
@@ -67,17 +67,17 @@ void GraphicalUserInterface::bindGladeWidgetsToVariables(Glib::RefPtr<Gtk::Build
 /**
  * Binds the user's interactions with the GUI to their appropriate methods, both inside the class and outside.
  * E.g.: when the stop button (buttonStop) is being clicked (signal_clicked), 
- * the member function (mem_fun) "stopMpd" of the object "playback" will be called (with no parameters).
+ * the member function (mem_fun) "stopMpd" of the object "playbackController" will be called (with no parameters).
  */
 void GraphicalUserInterface::bindWidgetSignalsToHandlers()
 {
     buttonStop->signal_clicked().connect(sigc::mem_fun(this, &GraphicalUserInterface::stopMpd));
     buttonPlay->signal_clicked().connect(sigc::mem_fun(this, &GraphicalUserInterface::playMpd));
-    buttonPause->signal_clicked().connect(sigc::mem_fun(playback, &MpdPlaybackController::pauseMpd));
+    buttonPause->signal_clicked().connect(sigc::mem_fun(playbackController, &PlaybackController::pauseMpd));
     buttonPrevious->signal_clicked().connect(sigc::mem_fun(this, &GraphicalUserInterface::previousSong));
     buttonNext->signal_clicked().connect(sigc::mem_fun(this, &GraphicalUserInterface::nextSong));
 
-    buttonMicrophone->signal_clicked().connect(sigc::mem_fun(voice, &VoiceController::listen));
+    buttonMicrophone->signal_clicked().connect(sigc::mem_fun(voiceController, &VoiceController::listen));
     buttonRemoveFromPlaylist->signal_clicked().connect(
         sigc::mem_fun(this, &GraphicalUserInterface::removeSelectedSongFromPlaylist));
     buttonAddToPlaylist->signal_clicked().connect(
@@ -85,7 +85,7 @@ void GraphicalUserInterface::bindWidgetSignalsToHandlers()
 
     // Volume parameter muss nicht explizit in mem_fun oder bind angegeben werden, da er in signal_value_changed implizit mituebergeben wird.
     // Er kann in der angegebenen Methode einfach als const double angenommen werden.
-    buttonVolume->signal_value_changed().connect(sigc::mem_fun(playback, &MpdPlaybackController::changeVolume));
+    buttonVolume->signal_value_changed().connect(sigc::mem_fun(playbackController, &PlaybackController::changeVolume));
 }
 
 /**
@@ -122,19 +122,19 @@ void GraphicalUserInterface::displayCurrentSongInWindowTitle()
 
 void GraphicalUserInterface::nextSong()
 {
-    playback.nextSong();
+    playbackController.nextSong();
     displayCurrentSongInWindowTitle();
 }
 
 void GraphicalUserInterface::playMpd()
 {
-    playback.playMpd();
+    playbackController.playMpd();
     displayCurrentSongInWindowTitle();
 }
 
 void GraphicalUserInterface::previousSong()
 {
-    playback.previousSong();
+    playbackController.previousSong();
     displayCurrentSongInWindowTitle();
 }
 
@@ -191,7 +191,7 @@ void GraphicalUserInterface::removeSelectedSongFromPlaylist()
     {
         Gtk::TreeModel::Row row = *selectedIterator;
 
-        playback.removeSongFromPlaylistAtPosition(row[playlistModel.songPosition]);
+        playbackController.removeSongFromPlaylistAtPosition(row[playlistModel.songPosition]);
         refreshDisplayedPlaylist();
         displayCurrentSongInWindowTitle();
     }
@@ -203,7 +203,7 @@ void GraphicalUserInterface::removeSelectedSongFromPlaylist()
 
 void GraphicalUserInterface::stopMpd()
 {
-    playback.stopMpd();
+    playbackController.stopMpd();
     displayCurrentSongInWindowTitle();
 }
 

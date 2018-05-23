@@ -1,9 +1,11 @@
 #include <gtkmm.h>
 #include <vector>
 #include <iostream>
-#include "../controllers/mpd_playback_controller.hh"
+
+#include "../controllers/playback_controller.hh"
 #include "../controllers/refresh_controller.hh"
 #include "../controllers/voice_controller.hh"
+
 #include "songlist_columns.hh"
 
 namespace Othr
@@ -38,12 +40,12 @@ private:
   Glib::RefPtr<Gtk::ListStore> liststorePlaylist;
   Glib::RefPtr<Gtk::ListStore> liststoreLibrary;
 
-  MpdPlaybackController playback;
+  PlaybackController playbackController;
   RefreshController refreshController;
-  VoiceController voice;
+  VoiceController voiceController;
 
 public:
-  GraphicalUserInterface(Glib::RefPtr<Gtk::Builder> refBuilder, MpdPlaybackController playback, RefreshController refreshController, VoiceController voice);
+  GraphicalUserInterface(Glib::RefPtr<Gtk::Builder> refBuilder, PlaybackController playbackController, RefreshController refreshController, VoiceController voiceController);
 
   void addSelectedSongFromLibraryToPlaylist();
 

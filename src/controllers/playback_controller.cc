@@ -1,11 +1,11 @@
-#include "mpd_playback_controller.hh"
+#include "playback_controller.hh"
 
 namespace Othr
 {
 
-MpdPlaybackController::MpdPlaybackController() {}
+PlaybackController::PlaybackController() {}
 
-void MpdPlaybackController::addSongToPlaylistWithTitle(const char *songTitle)
+void PlaybackController::addSongToPlaylistWithTitle(const char *songTitle)
 {
     auto connection = mpd_connection_new("localhost", 6600, 0);
     bool success = false;
@@ -23,7 +23,7 @@ void MpdPlaybackController::addSongToPlaylistWithTitle(const char *songTitle)
     //std::cout << "in addSongToPlaylistWithTitle(" + std::string(songTitle) + ")" << std::endl;
 }
 
-void MpdPlaybackController::changeVolume(const double volume)
+void PlaybackController::changeVolume(const double volume)
 {
     auto connection = mpd_connection_new("localhost", 6600, 0);
     bool success = false;
@@ -40,7 +40,7 @@ void MpdPlaybackController::changeVolume(const double volume)
     mpd_connection_free(connection);
 }
 
-void MpdPlaybackController::nextSong()
+void PlaybackController::nextSong()
 {
     auto connection = mpd_connection_new("localhost", 6600, 0);
     bool success = false;
@@ -57,7 +57,7 @@ void MpdPlaybackController::nextSong()
     mpd_connection_free(connection);
 }
 
-void MpdPlaybackController::pauseMpd()
+void PlaybackController::pauseMpd()
 {
     auto connection = mpd_connection_new("localhost", 6600, 0);
     bool success = false;
@@ -74,7 +74,7 @@ void MpdPlaybackController::pauseMpd()
     mpd_connection_free(connection);
 }
 
-void MpdPlaybackController::playMpd()
+void PlaybackController::playMpd()
 {
     auto connection = mpd_connection_new("localhost", 6600, 0);
     bool success = false;
@@ -91,7 +91,7 @@ void MpdPlaybackController::playMpd()
     mpd_connection_free(connection);
 }
 
-void MpdPlaybackController::previousSong()
+void PlaybackController::previousSong()
 {
     auto connection = mpd_connection_new("localhost", 6600, 0);
     bool success = false;
@@ -108,7 +108,7 @@ void MpdPlaybackController::previousSong()
     mpd_connection_free(connection);
 }
 
-void MpdPlaybackController::removeSongFromPlaylistAtPosition(int position)
+void PlaybackController::removeSongFromPlaylistAtPosition(int position)
 {
     std::cout << position << std::endl;
     auto connection = mpd_connection_new("localhost", 6600, 0);
@@ -126,7 +126,7 @@ void MpdPlaybackController::removeSongFromPlaylistAtPosition(int position)
     mpd_connection_free(connection);
 }
 
-void MpdPlaybackController::stopMpd()
+void PlaybackController::stopMpd()
 {
     auto connection = mpd_connection_new("localhost", 6600, 0);
     bool success = false;

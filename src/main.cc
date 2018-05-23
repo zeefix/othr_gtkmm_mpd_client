@@ -30,10 +30,10 @@ int main(int argc, char **argv)
         return 1;
     }
 
-    Othr::MpdPlaybackController playback;
+    Othr::PlaybackController playbackController;
     Othr::RefreshController refreshController;
     Othr::VoiceController voiceController;
-    Othr::GraphicalUserInterface gui(refBuilder, playback, refreshController, voiceController);
+    Othr::GraphicalUserInterface gui(refBuilder, playbackController, refreshController, voiceController);
 
     // TODO gui.getMainWindow()
     Gtk::Window *mainWindow;
