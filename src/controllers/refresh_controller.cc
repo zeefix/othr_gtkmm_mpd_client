@@ -4,7 +4,7 @@
 
 #include "refresh_controller.hh"
 
-namespace Othr
+namespace anothr
 {
 
 /**
@@ -107,4 +107,4 @@ std::vector<SongInfo> RefreshController::getMusicDirectoryContents()
 
     return songsInfo;
 }
-} // namespace Othr
+} // namespace anothr

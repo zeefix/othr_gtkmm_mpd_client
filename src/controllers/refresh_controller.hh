@@ -4,7 +4,7 @@
 
 #include "../models/song_info.hh"
 
-namespace Othr
+namespace anothr
 {
 
 /**

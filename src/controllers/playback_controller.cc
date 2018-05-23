@@ -5,7 +5,7 @@
 
 #include "playback_controller.hh"
 
-namespace Othr
+namespace anothr
 {
 
 void PlaybackController::addSongToPlaylistWithTitle(const char *songTitle)
@@ -144,4 +144,4 @@ void PlaybackController::stopMpd()
 
     mpd_connection_free(connection);
 }
-} // namespace Othr
+} // namespace anothr

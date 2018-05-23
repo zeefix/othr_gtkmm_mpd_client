@@ -1,6 +1,6 @@
 #include <gtkmm.h>
 
-namespace Othr
+namespace anothr
 {
 
 /**
@@ -18,4 +18,4 @@ public:
   unsigned int position;
   unsigned int id;
 };
-} // namespace Othr
+} // namespace anothr

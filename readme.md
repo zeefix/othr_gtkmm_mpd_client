@@ -1,4 +1,4 @@
-# Music Player Daemon Client made with gtkmm  
+# Anothr - an mpd client made with gtkmm  
 
 ## About
 
@@ -43,7 +43,7 @@ If you're building via the terminal:
 3. Run `export FLASK_APP=parse.py`
 4. Run `flask run`
 5. `cd` into `[project_root]/debug/src`
-6. Run the executable `./out` 
+6. Run the executable `./anothrclient` 
 
 
 ## The Natural Language Interface

@@ -1,4 +1,4 @@
-namespace Othr
+namespace anothr
 {
 
 class PlaybackController

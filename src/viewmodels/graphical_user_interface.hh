@@ -6,7 +6,7 @@
 
 #include "songlist_columns.hh"
 
-namespace Othr
+namespace anothr
 {
 
 /**
@@ -71,4 +71,4 @@ public:
 
   void stopMpd();
 };
-} // namespace Othr
+} // namespace anothr

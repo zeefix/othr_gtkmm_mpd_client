@@ -1,6 +1,6 @@
 #include "songlist_columns.hh"
 
-namespace Othr
+namespace anothr
 {
 
 SonglistColumns::SonglistColumns()

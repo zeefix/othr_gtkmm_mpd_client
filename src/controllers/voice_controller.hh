@@ -1,10 +1,9 @@
-namespace Othr
+namespace anothr
 {
 
 class VoiceController
 {
 public:
-  VoiceController();
   void listen();
 };
-} // namespace Othr
+} // namespace anothr

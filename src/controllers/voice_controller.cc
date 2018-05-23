@@ -4,10 +4,8 @@
 
 #include "voice_controller.hh"
 
-namespace Othr
+namespace anothr
 {
-
-VoiceController::VoiceController() {}
 /**
  * Fetches the current playlist by sending a "send" request to the mpd server, and then iterating over the received songs to extract their relevant information into an easily usable format.
  */
@@ -31,4 +29,4 @@ void VoiceController::listen()
 	// std::cout << "Printing in c++" << std::endl;
 }
 
-} // namespace Othr
+} // namespace anothr

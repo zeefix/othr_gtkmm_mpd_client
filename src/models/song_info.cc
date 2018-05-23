@@ -1,6 +1,6 @@
 #include "song_info.hh"
 
-namespace Othr
+namespace anothr
 {
 
 SongInfo::SongInfo()

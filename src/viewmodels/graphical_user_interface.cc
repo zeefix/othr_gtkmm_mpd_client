@@ -2,7 +2,7 @@
 
 #include "graphical_user_interface.hh"
 
-namespace Othr
+namespace anothr
 {
 
 GraphicalUserInterface::GraphicalUserInterface(Glib::RefPtr<Gtk::Builder> refBuilder, PlaybackController playbackController, RefreshController refreshController, VoiceController voiceController)
@@ -119,7 +119,7 @@ void GraphicalUserInterface::displayCurrentSongInWindowTitle()
     SongInfo currentSong = refreshController.getCurrentSong();
 
     Glib::ustring songTitle = Glib::ustring(currentSong.uri);
-    mainWindow->set_title(songTitle + "[Othr Gtkmm Player]");
+    mainWindow->set_title(songTitle + " [Anothr]");
 }
 
 void GraphicalUserInterface::nextSong()
@@ -209,4 +209,4 @@ void GraphicalUserInterface::stopMpd()
     displayCurrentSongInWindowTitle();
 }
 
-} // namespace Othr
+} // namespace anothr

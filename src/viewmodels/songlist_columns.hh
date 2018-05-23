@@ -1,6 +1,6 @@
 #include <gtkmm.h>
 
-namespace Othr
+namespace anothr
 {
 
 /**

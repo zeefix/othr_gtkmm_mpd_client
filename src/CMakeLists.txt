@@ -15,6 +15,6 @@ include_directories(
     ${PYTHON_INCLUDE_DIRS}
 )
 
-add_executable(out ${source})
+add_executable(anothrclient ${source})
 
-target_link_libraries(out ${GTKMM_LIBRARIES} ${PYTHON_LIBRARIES} -lmpdclient )
+target_link_libraries(anothrclient ${GTKMM_LIBRARIES} ${PYTHON_LIBRARIES} -lmpdclient )
