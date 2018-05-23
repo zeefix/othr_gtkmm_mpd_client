@@ -1,5 +1,7 @@
 #include "refresh_controller.hh"
 
+#include "../configs/mpd_config.hh"
+
 namespace Othr
 {
 
@@ -8,7 +10,7 @@ namespace Othr
  */
 std::vector<SongInfo> RefreshController::getCurrentPlaylist()
 {
-    auto connection = mpd_connection_new("localhost", 6600, 0);
+    auto connection = mpd_connection_new(MpdConfig::mpd_address, MpdConfig::mpd_port, 0);
     std::vector<SongInfo> songsInfo;
 
     if (mpd_send_list_queue_meta(connection))
@@ -40,7 +42,7 @@ std::vector<SongInfo> RefreshController::getCurrentPlaylist()
  */
 SongInfo RefreshController::getCurrentSong()
 {
-    auto connection = mpd_connection_new("localhost", 6600, 0);
+    auto connection = mpd_connection_new(MpdConfig::mpd_address, MpdConfig::mpd_port, 0);
 
     SongInfo currentSongInfo;
 
@@ -64,7 +66,7 @@ SongInfo RefreshController::getCurrentSong()
  */
 std::vector<SongInfo> RefreshController::getMusicDirectoryContents()
 {
-    auto connection = mpd_connection_new("localhost", 6600, 0);
+    auto connection = mpd_connection_new(MpdConfig::mpd_address, MpdConfig::mpd_port, 0);
     std::vector<SongInfo> songsInfo;
 
     if (mpd_send_list_all(connection, ""))
