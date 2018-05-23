@@ -5,10 +5,10 @@
 namespace Othr
 {
 
-class SignalHandler
+class MpdPlaybackController
 {
 public:
-  SignalHandler();
+  MpdPlaybackController();
   void addSongToPlaylistWithTitle(const char *songTitle);
   void changeVolume(const double volume);
   void nextSong();

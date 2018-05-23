@@ -30,10 +30,10 @@ int main(int argc, char **argv)
         return 1;
     }
 
-    Othr::SignalHandler signalHandler;
+    Othr::MpdPlaybackController playback;
     Othr::LibmpdHelper libmpdHelper;
     Othr::VoiceController voiceController;
-    Othr::GraphicalUserInterface gui(refBuilder, signalHandler, libmpdHelper, voiceController);
+    Othr::GraphicalUserInterface gui(refBuilder, playback, libmpdHelper, voiceController);
     Gtk::Window *mainWindow;
     refBuilder->get_widget("window_main", mainWindow);
 
