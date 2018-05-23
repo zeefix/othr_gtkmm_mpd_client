@@ -31,18 +31,19 @@ If you're building via the terminal:
 
 1. Create the directory `[project_root]/debug` and `cd` into it
 2. The voice control feature requires a [Microsoft Cognitive Services Speech to Text](https://azure.microsoft.com/en-us/services/cognitive-services/directory/speech/ "MS Cognitive Services STT Webpage") API Key, so create a `[project_root]/src/other_modules/natural_language_interface/configs/configuration.json` with the following structure: `{ "Bing_Key": "[your_api_key]" }`
-3. Write `cmake -DCMAKE_BUILD_TYPE=Debug ..`
-4. Write `make`
+3. Adjust `[project_root]/src/configs/mpd_config.hh` to match your mpd setups
+4. Run `cmake -DCMAKE_BUILD_TYPE=Debug ..`
+5. Run `make`
 
 
 ## Running the Client
 
 1. `cd` into `[project_root]/debug/src/natural_language_interface/MPD_NLP/service`
-2. Write `export FLASK_ENV=development`
-3. Write `export FLASK_APP=parse.py`
-4. Write `flask run`
-5. Make sure mpd runs on `localhost:6600`
-6. Execute the executable `out` from `[project_root]/debug/src`
+2. Run `export FLASK_ENV=development`
+3. Run `export FLASK_APP=parse.py`
+4. Run `flask run`
+5. `cd` into `[project_root]/debug/src`
+6. Run the executable `./out` 
 
 
 ## The Natural Language Interface
