@@ -3,8 +3,8 @@
 namespace Othr
 {
 
-GraphicalUserInterface::GraphicalUserInterface(Glib::RefPtr<Gtk::Builder> refBuilder, MpdPlaybackController playback, LibmpdHelper libmpdHelper, VoiceController voice)
-    : playback(playback), libmpdHelper(libmpdHelper), voice(voice)
+GraphicalUserInterface::GraphicalUserInterface(Glib::RefPtr<Gtk::Builder> refBuilder, MpdPlaybackController playback, RefreshController refreshController, VoiceController voice)
+    : playback(playback), refreshController(refreshController), voice(voice)
 {
     refBuilder->add_from_file("player.glade");
     bindGladeWidgetsToVariables(refBuilder);
@@ -114,7 +114,7 @@ void GraphicalUserInterface::createUnbindableWidgets()
 
 void GraphicalUserInterface::displayCurrentSongInWindowTitle()
 {
-    SongInfo currentSong = libmpdHelper.getCurrentSong();
+    SongInfo currentSong = refreshController.getCurrentSong();
 
     Glib::ustring songTitle = Glib::ustring(currentSong.uri);
     mainWindow->set_title(songTitle + "[Othr Gtkmm Player]");
@@ -143,7 +143,7 @@ void GraphicalUserInterface::previousSong()
  */
 void GraphicalUserInterface::refreshDisplayedLibrary()
 {
-    auto librarySongs = libmpdHelper.getMusicDirectoryContents();
+    auto librarySongs = refreshController.getMusicDirectoryContents();
 
     std::cout << librarySongs.size() << std::endl;
     for (int i = 0; i < librarySongs.size(); i++)
@@ -164,7 +164,7 @@ void GraphicalUserInterface::refreshDisplayedLibrary()
 void GraphicalUserInterface::refreshDisplayedPlaylist()
 {
     liststorePlaylist->clear();
-    auto songsInfo = libmpdHelper.getCurrentPlaylist();
+    auto songsInfo = refreshController.getCurrentPlaylist();
 
     for (int i = 0; i < songsInfo.size(); i++)
     {

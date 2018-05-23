@@ -12,7 +12,7 @@ namespace Othr
 /**
  * Collection of methods calling the libmpdclient library in a more complex way than just "fire and forget".
  */
-class LibmpdHelper
+class RefreshController
 {
 public:
   std::vector<SongInfo> getCurrentPlaylist();

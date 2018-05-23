@@ -1,4 +1,4 @@
-#include "libmpd_helper.hh"
+#include "refresh_controller.hh"
 
 namespace Othr
 {
@@ -6,7 +6,7 @@ namespace Othr
 /**
  * Fetches the current playlist by sending a "send" request to the mpd server, and then iterating over the received songs to extract their relevant information into an easily usable format.
  */
-std::vector<SongInfo> LibmpdHelper::getCurrentPlaylist()
+std::vector<SongInfo> RefreshController::getCurrentPlaylist()
 {
     auto connection = mpd_connection_new("localhost", 6600, 0);
     std::vector<SongInfo> songsInfo;
@@ -38,7 +38,7 @@ std::vector<SongInfo> LibmpdHelper::getCurrentPlaylist()
 /**
  * Fetches the current playlist by sending a "send" request to the mpd server, and then iterating over the received songs to extract their relevant information into an easily usable format.
  */
-SongInfo LibmpdHelper::getCurrentSong()
+SongInfo RefreshController::getCurrentSong()
 {
     auto connection = mpd_connection_new("localhost", 6600, 0);
 
@@ -62,7 +62,7 @@ SongInfo LibmpdHelper::getCurrentSong()
 /**
  * Fetches the current contents of the mpd music directory by sending a "send" request to the mpd server, and then iterating over the received entities to extract their relevant information into an easily usable format.
  */
-std::vector<SongInfo> LibmpdHelper::getMusicDirectoryContents()
+std::vector<SongInfo> RefreshController::getMusicDirectoryContents()
 {
     auto connection = mpd_connection_new("localhost", 6600, 0);
     std::vector<SongInfo> songsInfo;

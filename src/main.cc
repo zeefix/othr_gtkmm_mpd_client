@@ -31,9 +31,11 @@ int main(int argc, char **argv)
     }
 
     Othr::MpdPlaybackController playback;
-    Othr::LibmpdHelper libmpdHelper;
+    Othr::RefreshController refreshController;
     Othr::VoiceController voiceController;
-    Othr::GraphicalUserInterface gui(refBuilder, playback, libmpdHelper, voiceController);
+    Othr::GraphicalUserInterface gui(refBuilder, playback, refreshController, voiceController);
+
+    // TODO gui.getMainWindow()
     Gtk::Window *mainWindow;
     refBuilder->get_widget("window_main", mainWindow);
 

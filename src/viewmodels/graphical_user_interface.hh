@@ -2,7 +2,7 @@
 #include <vector>
 #include <iostream>
 #include "../controllers/mpd_playback_controller.hh"
-#include "../controllers/libmpd_helper.hh"
+#include "../controllers/refresh_controller.hh"
 #include "../controllers/voice_controller.hh"
 #include "songlist_columns.hh"
 
@@ -39,11 +39,11 @@ private:
   Glib::RefPtr<Gtk::ListStore> liststoreLibrary;
 
   MpdPlaybackController playback;
-  LibmpdHelper libmpdHelper;
+  RefreshController refreshController;
   VoiceController voice;
 
 public:
-  GraphicalUserInterface(Glib::RefPtr<Gtk::Builder> refBuilder, MpdPlaybackController playback, LibmpdHelper libmpdHelper, VoiceController voice);
+  GraphicalUserInterface(Glib::RefPtr<Gtk::Builder> refBuilder, MpdPlaybackController playback, RefreshController refreshController, VoiceController voice);
 
   void addSelectedSongFromLibraryToPlaylist();
 
