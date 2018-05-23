@@ -1,11 +1,12 @@
-#include "playback_controller.hh"
+#include <iostream>
+#include <mpd/client.h>
 
 #include "../configs/mpd_config.hh"
 
+#include "playback_controller.hh"
+
 namespace Othr
 {
-
-PlaybackController::PlaybackController() {}
 
 void PlaybackController::addSongToPlaylistWithTitle(const char *songTitle)
 {
@@ -14,7 +15,7 @@ void PlaybackController::addSongToPlaylistWithTitle(const char *songTitle)
 
     if (success = mpd_run_add(connection, songTitle))
     {
-        std::cout << "Mpd Add: " << std::string(songTitle) << std::endl;
+        std::cout << "Mpd Add: " << songTitle << std::endl;
     }
     else
     {
@@ -22,7 +23,6 @@ void PlaybackController::addSongToPlaylistWithTitle(const char *songTitle)
     }
 
     mpd_connection_free(connection);
-    //std::cout << "in addSongToPlaylistWithTitle(" + std::string(songTitle) + ")" << std::endl;
 }
 
 void PlaybackController::changeVolume(const double volume)
@@ -144,4 +144,4 @@ void PlaybackController::stopMpd()
 
     mpd_connection_free(connection);
 }
-}
+} // namespace Othr

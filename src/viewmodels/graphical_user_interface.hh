@@ -1,6 +1,4 @@
 #include <gtkmm.h>
-#include <vector>
-#include <iostream>
 
 #include "../controllers/playback_controller.hh"
 #include "../controllers/refresh_controller.hh"

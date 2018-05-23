@@ -1,6 +1,8 @@
-#include "refresh_controller.hh"
+#include <iostream>
 
 #include "../configs/mpd_config.hh"
+
+#include "refresh_controller.hh"
 
 namespace Othr
 {

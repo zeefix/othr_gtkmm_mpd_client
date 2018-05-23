@@ -1,3 +1,7 @@
+#include <iostream>
+
+#include <Python.h>
+
 #include "voice_controller.hh"
 
 namespace Othr

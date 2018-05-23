@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "graphical_user_interface.hh"
 
 namespace Othr

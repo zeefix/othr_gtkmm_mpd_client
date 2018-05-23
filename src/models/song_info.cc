@@ -1,5 +1,5 @@
 #include "song_info.hh"
-#include <iostream>
+
 namespace Othr
 {
 
@@ -26,6 +26,6 @@ SongInfo::SongInfo(Glib::ustring songUri, unsigned int songPosition, unsigned in
 
 bool SongInfo::isEmpty()
 {
-  return (uri == "") && (position == 0) && (id == 0);
+  return ((uri == "") && (position == 0) && (id == 0));
 }
 } // namespace Othr

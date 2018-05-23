@@ -1,14 +1,9 @@
-#include <iostream>
-#include <mpd/client.h>
-#include <string>
-
 namespace Othr
 {
 
 class PlaybackController
 {
 public:
-  PlaybackController();
   void addSongToPlaylistWithTitle(const char *songTitle);
   void changeVolume(const double volume);
   void nextSong();
