@@ -1,13 +1,19 @@
+import sys
+sys.path.append('./')
+sys.path.append('./natural_language_interface')
+
 import json
 import requests
+import os
+
 from speech_control.speech_to_text import SpeechToText
 from speech_control.text_to_speech import TextToSpeech
 
 if __name__ == '__main__':
 
     try:
-
-        with open('configs/configuration.json') as json_file:
+        print(os.getcwd())
+        with open(os.getcwd() + '/natural_language_interface/configs/configuration.json') as json_file:
             json_data = json.load(json_file)
 
         BING_KEY = json_data.get('Bing_Key')

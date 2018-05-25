@@ -11,9 +11,9 @@ namespace anothr
  */
 void VoiceController::listen()
 {
-	char filename[] = "natural_language_interface/main.py";
+	char filename[] = "natural_language_interface/main_cpp.py";
 	FILE *fp;
-	wchar_t *program = Py_DecodeLocale("main.py", NULL);
+	wchar_t *program = Py_DecodeLocale("main_cpp.py", NULL);
 
 	if (program == NULL)
 	{
