@@ -1,10 +1,17 @@
+# This file was originally intended to be executed directly from the c++ client instead of from the Flask server.
+# The problem was that the conversational state would be erased after each execution.
+# As it stands the only two solutions are to either keep it running on the server, or port the whole speech parsing into the c++ client, where the conversational state would be kept for as long as the client is running.
+# Currently this file is kept purely for documentation purposes.
+
 import sys
 
 sys.path.append('./')
-sys.path.append('./othr_gtkmm_mpd_client/src/other_modules/natural_language_interface')
+sys.path.append('../')
+sys.path.append('../../')
+#sys.path.append('./othr_gtkmm_mpd_client/src/other_modules/natural_language_interface')
 
 
-#import spacy
+import spacy
 import MPD_NLP.service.mpd_provider_module as mpm
 from MPD_NLP.service import verbalizer
 from expiringdict import ExpiringDict
@@ -14,6 +21,18 @@ from MPD_NLP.service.conversationState import ConversationStateEnum, Conversatio
 import logging as log
 import string
 
+nlp = spacy.load("en_core_web_lg")
+states = ExpiringDict(max_len=100, max_age_seconds=10)
+
+verbose = True
+
+if verbose:
+    log.basicConfig(format="%(levelname)s: %(message)s", level=log.DEBUG)
+    log.info("Verbose output.")
+else:
+    log.basicConfig(format="%(levelname)s: %(message)s")
+
+print("READY for requests")
 
 def parse(input, userid):
     #start with part of speech tagging
@@ -253,4 +272,4 @@ def repeatPlaylist():
 
 
 if __name__ == '__main__':
-    parse("asdf",1)
+    parse("Stop",1)
