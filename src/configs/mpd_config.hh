@@ -1,4 +1,5 @@
 /**
+ * These are the settings to connect the client to the mpd server.
  * It needs to be compiled, which means it's not as versatile as a json config.
  * It is enough when trying to keep dependencies to a minimum though.
  */

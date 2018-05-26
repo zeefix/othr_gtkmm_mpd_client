@@ -3,6 +3,9 @@
 #include <gtkmm.h>
 #include <mpd/client.h>
 
+#include "controllers/playback_controller.hh"
+#include "controllers/refresh_controller.hh"
+#include "controllers/voice_controller.hh"
 #include "viewmodels/graphical_user_interface.hh"
 
 int main(int argc, char **argv)
