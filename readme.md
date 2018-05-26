@@ -21,7 +21,7 @@ Also contains an experimental natural language interface, which was forked from 
     * Hard: download and build the source files from the [musicpd.org website](https://www.musicpd.org/download/mpd/ "mpd download section")
 * python: download and install the `python3` and `python3-dev` packages
 * flask: download and install Flask with Python's package manager: `pip3 install flask`
-* all dependencies listed in `[project_root]/src/other_modules/speech_processing/README.md`
+* all dependencies listed in `<project_root>/src/other_modules/speech_processing/README.md`
 
 ### Steps
 
@@ -30,20 +30,20 @@ If you have a good IDE (e.g. [CLion](https://www.jetbrains.com/clion/ "JetBrains
 If you're building via the terminal:
 
 
-1. The voice control feature requires a [Microsoft Cognitive Services Speech to Text](https://azure.microsoft.com/en-us/services/cognitive-services/directory/speech/ "MS Cognitive Services STT Webpage") API Key, so create a `[project_root]/src/other_modules/natural_language_interface/configs/configuration.json` with the following structure: `{ "Bing_Key": "[your_api_key]" }`
-2. Adjust `[project_root]/src/configs/mpd_config.hh` to match your mpd setup
-3. Create the directory `[project_root]/debug` and `cd` into it
+1. The voice control feature requires a [Microsoft Cognitive Services Bing Speech](https://azure.microsoft.com/en-us/try/cognitive-services/ "MS Cognitive Services Webpage") API Key, so create a `<project_root>/src/other_modules/natural_language_interface/configs/configuration.json` with the following structure: `{ "Bing_Key": "<your_api_key>" }`
+2. Adjust `<project_root>/src/configs/mpd_config.hh` to match your mpd setup
+3. Create the directory `<project_root>/debug` and `cd` into it
 4. Run `cmake ..`
 5. Run `make`
 
 
 ## Running the Client
 
-1. `cd` into `[project_root]/debug/src/natural_language_interface/MPD_NLP/service`
+1. `cd` into `<project_root>/debug/src/natural_language_interface/MPD_NLP/service`
 2. Run `export FLASK_ENV=development`
 3. Run `export FLASK_APP=parse.py`
 4. Run `flask run`
-5. `cd` into `[project_root]/debug/src`
+5. `cd` into `<project_root>/debug/src`
 6. Run the executable `./anothrclient` 
 
 
