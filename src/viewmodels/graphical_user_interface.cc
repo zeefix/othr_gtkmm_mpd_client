@@ -37,7 +37,7 @@ void GraphicalUserInterface::addSelectedSongFromLibraryToPlaylist()
         Glib::ustring songTitleUstring = row[playlistModel.songTitle];
         const char *SongTitleCharpointer = songTitleUstring.c_str();
 
-        playbackController.addSongToPlaylistWithTitle(SongTitleCharpointer);
+        playbackController.addSongToPlaylistViaTitle(SongTitleCharpointer);
         refreshDisplayedPlaylist();
     }
     else
@@ -79,21 +79,21 @@ void GraphicalUserInterface::bindWidgetSignalsToHandlers()
     buttonPrevious->signal_clicked().connect(sigc::mem_fun(this, &GraphicalUserInterface::previousSong));
     buttonNext->signal_clicked().connect(sigc::mem_fun(this, &GraphicalUserInterface::nextSong));
 
-    buttonMicrophone->signal_clicked().connect(sigc::mem_fun(voiceController, &VoiceController::listen));
+    buttonMicrophone->signal_clicked().connect(sigc::mem_fun(voiceController, &VoiceController::runVoiceRecognition));
     buttonRemoveFromPlaylist->signal_clicked().connect(
         sigc::mem_fun(this, &GraphicalUserInterface::removeSelectedSongFromPlaylist));
     buttonAddToPlaylist->signal_clicked().connect(
         sigc::mem_fun(this, &GraphicalUserInterface::addSelectedSongFromLibraryToPlaylist));
 
-    // Volume parameter muss nicht explizit in mem_fun oder bind angegeben werden, da er in signal_value_changed implizit mituebergeben wird.
-    // Er kann in der angegebenen Methode einfach als const double angenommen werden.
+    // Volume parameter does not have to be explicitly written in mem_fun/bind.
+    // It will be implicitly passed in signal_value_changed.
     buttonVolume->signal_value_changed().connect(sigc::mem_fun(playbackController, &PlaybackController::changeVolume));
 }
 
 /**
  * Binds those widgets that cannot be defined in Glade when using Gtkmm. 
- * For example the C (as used in Glade) and C++ types are just too different, 
- * and the statically-typed C++ API can't know about your glade file's TreeModel definition at compile time.
+ * For example the C (as used in Glade) and C++ types are too different. 
+ * The statically-typed C++ API can't know about the .glade file's TreeModel definition at compile time.
  * See: https://stackoverflow.com/questions/28200839/glade-constructed-treeview-with-gtkmm
  */
 void GraphicalUserInterface::createUnbindableWidgets()
@@ -104,7 +104,6 @@ void GraphicalUserInterface::createUnbindableWidgets()
     treeviewPlaylist->set_model(liststorePlaylist);
     treeviewLibrary->set_model(liststoreLibrary);
 
-    // If you are accessing a property of an object or object reference, use . If you are accessing a property of an object through a pointer, use ->
     treeviewPlaylist->append_column("Position", playlistModel.songPosition);
     treeviewPlaylist->append_column("Id", playlistModel.songId);
     treeviewPlaylist->append_column("Title", playlistModel.songTitle);
@@ -140,12 +139,9 @@ void GraphicalUserInterface::previousSong()
     displayCurrentSongInWindowTitle();
 }
 
-/**
- * Clears the displayed song library in the client, fetches the songs which are currently in the mpd music directory, and refills it.
- */
 void GraphicalUserInterface::refreshDisplayedLibrary()
 {
-    auto librarySongs = refreshController.getMusicDirectoryContents();
+    auto librarySongs = refreshController.getSongsInLibrary();
 
     std::cout << librarySongs.size() << std::endl;
     for (int i = 0; i < librarySongs.size(); i++)
@@ -160,13 +156,10 @@ void GraphicalUserInterface::refreshDisplayedLibrary()
     }
 }
 
-/**
- * Clears the displayed playlist, fetches the current playlist from mpd, and refills it.
- */
 void GraphicalUserInterface::refreshDisplayedPlaylist()
 {
     liststorePlaylist->clear();
-    auto songsInfo = refreshController.getCurrentPlaylist();
+    auto songsInfo = refreshController.getSongsInPlaylist();
 
     for (int i = 0; i < songsInfo.size(); i++)
     {
@@ -180,9 +173,6 @@ void GraphicalUserInterface::refreshDisplayedPlaylist()
     }
 }
 
-/**
- * Removes the currently selected song from the playlist by getting its position from the Gtk::TreeSelection, and sending it to the mpd server.
- */
 void GraphicalUserInterface::removeSelectedSongFromPlaylist()
 {
     Glib::RefPtr<Gtk::TreeSelection> selection = treeviewPlaylist->get_selection();

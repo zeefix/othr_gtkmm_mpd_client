@@ -7,7 +7,7 @@
 namespace anothr
 {
 
-void VoiceController::listen()
+void VoiceController::runVoiceRecognition()
 {
 	char filename[] = "natural_language_interface/main_cpp.py";
 	FILE *fp;

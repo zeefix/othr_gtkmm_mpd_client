@@ -11,8 +11,9 @@ namespace anothr
 class VoiceController
 {
 public:
-  void listen();
+  void runVoiceRecognition();
 };
+
 } // namespace anothr
 
 #endif

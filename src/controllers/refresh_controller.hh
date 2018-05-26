@@ -18,8 +18,8 @@ namespace anothr
 class RefreshController
 {
 public:
-  std::vector<SongInfo> getCurrentPlaylist();
-  std::vector<SongInfo> getMusicDirectoryContents();
+  std::vector<SongInfo> getSongsInPlaylist();
+  std::vector<SongInfo> getSongsInLibrary();
   SongInfo getCurrentSong();
 };
 } // namespace anothr

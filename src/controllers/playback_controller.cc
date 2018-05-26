@@ -8,7 +8,7 @@
 namespace anothr
 {
 
-void PlaybackController::addSongToPlaylistWithTitle(const char *songTitle)
+void PlaybackController::addSongToPlaylistViaTitle(const char *songTitle)
 {
     auto connection = mpd_connection_new(MpdConfig::mpd_address, MpdConfig::mpd_port, 0);
     bool success = false;
