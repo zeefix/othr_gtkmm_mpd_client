@@ -1,3 +1,8 @@
+/**
+ * This class is concerned with receiving information from the mpd server.
+ * That information may be used to for example update the View.
+ */
+
 #include <vector>
 
 #include <mpd/client.h>
@@ -10,9 +15,6 @@
 namespace anothr
 {
 
-/**
- * Collection of methods calling the libmpdclient library in a more complex way than just "fire and forget".
- */
 class RefreshController
 {
 public:

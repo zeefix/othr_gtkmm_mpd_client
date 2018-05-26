@@ -1,3 +1,7 @@
+/**
+ * An MVC Model used to store all relevant information of a song in an.
+ */
+
 #include <gtkmm.h>
 
 #ifndef ANOTHR_SONG_INFO_H
@@ -6,9 +10,6 @@
 namespace anothr
 {
 
-/**
- * An MVC Model used to store all relevant information of a song.
- */
 class SongInfo
 {
 public:

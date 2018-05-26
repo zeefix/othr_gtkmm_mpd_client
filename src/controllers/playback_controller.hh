@@ -1,3 +1,7 @@
+/**
+ * This class controlls the playback behaviour of the mpd server.
+ */
+
 #ifndef ANOTHR_PLAYBACK_CONTROLLER_H
 #define ANOTHR_PLAYBACK_CONTROLLER_H
 

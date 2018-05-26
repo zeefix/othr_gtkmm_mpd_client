@@ -1,3 +1,8 @@
+/**
+ * The Viewmodel for the music player.
+ * Contains all widgets and methods used to interact with them.
+ */
+
 #include <gtkmm.h>
 
 #include "../controllers/playback_controller.hh"
@@ -12,10 +17,6 @@
 namespace anothr
 {
 
-/**
- * The Viewmodel for the music player.
- * Contains all widgets that are needed for basic playback controls.
- */
 class GraphicalUserInterface
 {
 private:
@@ -46,32 +47,24 @@ private:
   VoiceController voiceController;
 
 public:
-  GraphicalUserInterface(Glib::RefPtr<Gtk::Builder> refBuilder, PlaybackController playbackController, RefreshController refreshController, VoiceController voiceController);
+  GraphicalUserInterface(
+      Glib::RefPtr<Gtk::Builder> refBuilder,
+      PlaybackController playbackController,
+      RefreshController refreshController,
+      VoiceController voiceController);
 
   void addSelectedSongFromLibraryToPlaylist();
-
   void bindGladeWidgetsToVariables(Glib::RefPtr<Gtk::Builder> refBuilder);
-
   void bindWidgetSignalsToHandlers();
-
   void createUnbindableWidgets();
-
   void displayCurrentSongInWindowTitle();
-
   void microphoneClicked();
-
   void nextSong();
-
   void playMpd();
-
   void previousSong();
-
   void refreshDisplayedLibrary();
-
   void refreshDisplayedPlaylist();
-
   void removeSelectedSongFromPlaylist();
-
   void stopMpd();
 };
 } // namespace anothr

@@ -7,12 +7,10 @@
 namespace anothr
 {
 
-/**
- * Fetches the current playlist by sending a "send" request to the mpd server, and then iterating over the received songs to extract their relevant information into an easily usable format.
- */
 std::vector<SongInfo> RefreshController::getCurrentPlaylist()
 {
     auto connection = mpd_connection_new(MpdConfig::mpd_address, MpdConfig::mpd_port, 0);
+
     std::vector<SongInfo> songsInfo;
 
     if (mpd_send_list_queue_meta(connection))
@@ -22,9 +20,14 @@ std::vector<SongInfo> RefreshController::getCurrentPlaylist()
         while ((song = mpd_recv_song(connection)) != NULL)
         {
             auto uri = mpd_song_get_uri(song);
+            auto position = mpd_song_get_pos(song);
+            auto id = mpd_song_get_id(song);
+
             std::cout << uri << std::endl;
-            SongInfo songInfo(uri, mpd_song_get_pos(song), mpd_song_get_id(song));
+
+            SongInfo songInfo(uri, position, id);
             songsInfo.push_back(songInfo);
+
             mpd_song_free(song);
         }
     }
@@ -39,9 +42,6 @@ std::vector<SongInfo> RefreshController::getCurrentPlaylist()
     return songsInfo;
 }
 
-/**
- * Fetches the current playlist by sending a "send" request to the mpd server, and then iterating over the received songs to extract their relevant information into an easily usable format.
- */
 SongInfo RefreshController::getCurrentSong()
 {
     auto connection = mpd_connection_new(MpdConfig::mpd_address, MpdConfig::mpd_port, 0);
@@ -63,9 +63,6 @@ SongInfo RefreshController::getCurrentSong()
     return currentSongInfo;
 }
 
-/**
- * Fetches the current contents of the mpd music directory by sending a "send" request to the mpd server, and then iterating over the received entities to extract their relevant information into an easily usable format.
- */
 std::vector<SongInfo> RefreshController::getMusicDirectoryContents()
 {
     auto connection = mpd_connection_new(MpdConfig::mpd_address, MpdConfig::mpd_port, 0);

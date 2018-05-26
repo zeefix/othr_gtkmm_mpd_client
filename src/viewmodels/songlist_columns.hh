@@ -1,3 +1,11 @@
+/**
+ * Defines the columns for the Treeviews containing song information, i.e. the library and the playlist.
+ * Each member variable needs to be added (add(<memberVar>)) in the constructor.
+ * An instance of this class can then be passed to ListStore::create(<instance>) or TreeStore::create(<instance>).
+ * The SonglistColumns can then be used with the Gtk::TreeRow::operator[]() to specify the column you're interested in. For example:
+ * row[playlistColumns.songPosition].
+ */
+
 #include <gtkmm.h>
 
 #ifndef ANOTHR_SONGLIST_COLUMNS_H
@@ -6,12 +14,6 @@
 namespace anothr
 {
 
-/**
- * Defines the columns for the Treeviews "treeviewPlaylist" and "treeviewLibrary".
- * Each member variable need to be added (add(memberVar)) in the constructor.
- * A ColumnRecord instance, such as an instance of this class should then be passed to ListStore::create(<here>) or TreeStore::create(<here>).
- * The TreeModelColumns, can then be used with Gtk::TreeRow::operator[]() to specify the column you're interested in. E.g.: row[playlistColumns.songPosition]
- */
 class SonglistColumns : public Gtk::TreeModelColumnRecord
 {
 public:

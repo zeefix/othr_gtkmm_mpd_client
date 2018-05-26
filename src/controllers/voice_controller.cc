@@ -6,9 +6,7 @@
 
 namespace anothr
 {
-/**
- * Fetches the current playlist by sending a "send" request to the mpd server, and then iterating over the received songs to extract their relevant information into an easily usable format.
- */
+
 void VoiceController::listen()
 {
 	char filename[] = "natural_language_interface/main_cpp.py";
@@ -26,7 +24,6 @@ void VoiceController::listen()
 	PyRun_SimpleFile(fp, filename);
 	Py_Finalize();
 	PyMem_RawFree(program);
-	// std::cout << "Printing in c++" << std::endl;
 }
 
 } // namespace anothr
