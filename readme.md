@@ -49,11 +49,6 @@ If you're building via the terminal:
 
 ## The Natural Language Interface
 
-is currently pretty buggy. 
-
 To use it, add the desired songs to the playlist via the GUI. Then click the "mic"-Button and wait for the terminal to say "Please say something...". Speak loudly and clearly into your microphone, e.g. "Please play '[your_song_title]'".
-
-If your Flask server throws an error or shuts itself down for some reason, restart your computer. 
-If you were understood correctly, this is where the bugs happen. Sometimes your whole library will be added to the playlist, including your desired song TWICE.
 
 Then the playback starts. Enjoy!
