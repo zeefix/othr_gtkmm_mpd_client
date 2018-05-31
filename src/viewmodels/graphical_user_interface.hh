@@ -66,6 +66,8 @@ public:
   void refreshDisplayedPlaylist();
   void removeSelectedSongFromPlaylist();
   void stopMpd();
+  
+  bool updateProgressbar();
 };
 } // namespace anothr
 

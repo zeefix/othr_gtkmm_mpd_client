@@ -18,6 +18,7 @@ namespace anothr
 class RefreshController
 {
 public:
+  double getElapsedSongTimeFraction();
   std::vector<SongInfo> getSongsInPlaylist();
   std::vector<SongInfo> getSongsInLibrary();
   SongInfo getCurrentSong();

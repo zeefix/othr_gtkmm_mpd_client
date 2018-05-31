@@ -88,6 +88,8 @@ void GraphicalUserInterface::bindWidgetSignalsToHandlers()
     // Volume parameter does not have to be explicitly written in mem_fun/bind.
     // It will be implicitly passed in signal_value_changed.
     buttonVolume->signal_value_changed().connect(sigc::mem_fun(playbackController, &PlaybackController::changeVolume));
+
+    //Glib::signal_timeout().connect( sigc::mem_fun(this, &GraphicalUserInterface::updateProgressbar), 2000);
 }
 
 /**
@@ -197,6 +199,15 @@ void GraphicalUserInterface::stopMpd()
 {
     playbackController.stopMpd();
     displayCurrentSongInWindowTitle();
+}
+
+bool GraphicalUserInterface::updateProgressbar()
+{
+    //double elapsed = refreshController.getElapsedSongTimeFraction();
+    double elapsed = 0.0;
+    progressBar->set_fraction(elapsed);
+
+    return true;
 }
 
 } // namespace anothr

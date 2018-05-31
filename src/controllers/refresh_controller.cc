@@ -28,6 +28,29 @@ SongInfo RefreshController::getCurrentSong()
     return currentSongInfo;
 }
 
+double RefreshController::getElapsedSongTimeFraction()
+{
+    auto connection = mpd_connection_new(MpdConfig::mpd_address, MpdConfig::mpd_port, 0);
+
+    mpd_song *currentSong = nullptr;
+    mpd_status *status = nullptr;
+
+    if ((currentSong = mpd_run_current_song(connection))
+    &&  (status = mpd_run_status(connection)))
+    {
+        auto duration = mpd_song_get_duration_ms(currentSong);
+        auto elapsed = mpd_status_get_elapsed_ms(status);
+        std::cout << duration << std::endl;
+        std::cout << elapsed << std::endl;
+
+        double elapsedFraction = (double)duration / elapsed;
+        std::cout << elapsedFraction << std::endl;
+
+        return elapsedFraction;
+    }
+    
+}
+
 std::vector<SongInfo> RefreshController::getSongsInLibrary()
 {
     auto connection = mpd_connection_new(MpdConfig::mpd_address, MpdConfig::mpd_port, 0);
@@ -104,4 +127,5 @@ std::vector<SongInfo> RefreshController::getSongsInPlaylist()
 
     return songsInfo;
 }
+
 } // namespace anothr
