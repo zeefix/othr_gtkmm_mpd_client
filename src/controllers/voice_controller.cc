@@ -9,9 +9,11 @@ namespace anothr
 
 void VoiceController::runVoiceRecognition()
 {
-	char filename[] = "natural_language_interface/main_cpp.py";
+	char filename[] = "speech_request_client.py";
+	char file_path[] = "speech_processing/speech_request_client.py";
+
 	FILE *fp;
-	wchar_t *program = Py_DecodeLocale("main_cpp.py", NULL);
+	wchar_t *program = Py_DecodeLocale(filename, NULL);
 
 	if (program == NULL)
 	{
@@ -19,9 +21,9 @@ void VoiceController::runVoiceRecognition()
 	}
 	Py_SetProgramName(program);
 	Py_Initialize();
-	fp = _Py_fopen(filename, "r");
+	fp = _Py_fopen(file_path, "r");
 
-	PyRun_SimpleFile(fp, filename);
+	PyRun_SimpleFile(fp, file_path);
 	Py_Finalize();
 	PyMem_RawFree(program);
 }

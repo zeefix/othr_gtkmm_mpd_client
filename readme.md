@@ -3,7 +3,7 @@
 ## About
 
 A graphical client for the [music player daemon](https://www.musicpd.org "mpd homepage") with basic playback functionality.
-Also contains an experimental natural language interface, which was forked from https://github.com/bierschi/speech_processing (as of 2018.05.20).
+It contains https://github.com/bierschi/speech_processing as a submodule, which is an experimental natural language interface.
 
 
 ## Installation
@@ -25,26 +25,21 @@ Also contains an experimental natural language interface, which was forked from 
 
 ### Steps
 
-If you have a good IDE (e.g. [CLion](https://www.jetbrains.com/clion/ "JetBrains CLion Website")): let cmake and make do their magic
-
-If you're building via the terminal:
-
-
-1. The voice control feature requires a [Microsoft Cognitive Services Bing Speech](https://azure.microsoft.com/en-us/try/cognitive-services/ "MS Cognitive Services Webpage") API Key, so create a `<project_root>/src/other_modules/natural_language_interface/configs/configuration.json` with the following structure: `{ "Bing_Key": "<your_api_key>" }`
-2. Adjust `<project_root>/src/configs/mpd_config.hh` to match your mpd setup
-3. Create the directory `<project_root>/debug` and `cd` into it
-4. Run `cmake ..`
-5. Run `make`
+1. Adjust `<project_root>/src/configs/mpd_config.hh` to match your mpd setup
+2. Create the directory `<project_root>/debug/` and `cd` into it
+3. Run `cmake ..`
+4. Run `make`
+5. `cd` into `<project_root>/debug/src/speech_processing/`
+5. Run `sudo python3 setup.py install` 
 
 
 ## Running the Client
 
-1. `cd` into `<project_root>/debug/src/natural_language_interface/MPD_NLP/service`
-2. Run `export FLASK_ENV=development`
-3. Run `export FLASK_APP=parse.py`
-4. Run `flask run`
-5. `cd` into `<project_root>/debug/src`
-6. Run the executable `./anothrclient` 
+1. `cd` into `<project_root>/debug/src/speech_processing/`
+2. Run `export FLASK_APP=parse_server.py`
+3. Run `flask run`
+4. Open a new terminal and `cd` into `<project_root>/debug/src/`
+5. Run the executable `sudo ./anothrclient` 
 
 
 ## The Natural Language Interface
