@@ -30,7 +30,7 @@ It contains https://github.com/bierschi/speech_processing as a submodule, which 
 3. Run `cmake ..`
 4. Run `make`
 5. `cd` into `<project_root>/debug/src/speech_processing/`
-5. Run `sudo python3 setup.py install` 
+6. Run `sudo python3 setup.py install` 
 
 
 ## Running the Client
