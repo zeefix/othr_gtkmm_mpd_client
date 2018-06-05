@@ -79,7 +79,7 @@ void GraphicalUserInterface::bindWidgetSignalsToHandlers()
     buttonPrevious->signal_clicked().connect(sigc::mem_fun(this, &GraphicalUserInterface::previousSong));
     buttonNext->signal_clicked().connect(sigc::mem_fun(this, &GraphicalUserInterface::nextSong));
 
-    buttonMicrophone->signal_clicked().connect(sigc::mem_fun(voiceController, &VoiceController::runVoiceRecognition));
+    buttonMicrophone->signal_clicked().connect(sigc::mem_fun(this, &GraphicalUserInterface::runVoiceRecognition));
     buttonRemoveFromPlaylist->signal_clicked().connect(
         sigc::mem_fun(this, &GraphicalUserInterface::removeSelectedSongFromPlaylist));
     buttonAddToPlaylist->signal_clicked().connect(
@@ -191,6 +191,13 @@ void GraphicalUserInterface::removeSelectedSongFromPlaylist()
     {
         std::cout << "Nothing selected in Playlist." << std::endl;
     }
+}
+
+void GraphicalUserInterface::runVoiceRecognition()
+{
+    voiceController.runVoiceRecognition();
+    displayCurrentSongInWindowTitle();
+    refreshDisplayedPlaylist();
 }
 
 void GraphicalUserInterface::stopMpd()

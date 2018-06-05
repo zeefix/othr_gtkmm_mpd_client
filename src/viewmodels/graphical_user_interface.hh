@@ -58,13 +58,13 @@ public:
   void bindWidgetSignalsToHandlers();
   void createUnbindableWidgets();
   void displayCurrentSongInWindowTitle();
-  void microphoneClicked();
   void nextSong();
   void playMpd();
   void previousSong();
   void refreshDisplayedLibrary();
   void refreshDisplayedPlaylist();
   void removeSelectedSongFromPlaylist();
+  void runVoiceRecognition();
   void stopMpd();
 };
 } // namespace anothr
