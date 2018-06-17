@@ -1,3 +1,6 @@
 [submodule "src/other_modules/speech_processing"]
 	path = src/other_modules/speech_processing
 	url = https://github.com/bierschi/speech_processing.git
+[submodule "src/other_modules/Visualizer_App"]
+	path = src/other_modules/Visualizer_App
+	url = https://github.com/chris2831994/Visualizer_App.git
