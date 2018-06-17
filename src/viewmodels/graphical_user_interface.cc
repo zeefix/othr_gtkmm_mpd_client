@@ -1,6 +1,8 @@
 #include <iostream>
+#include <memory>
 
 #include "graphical_user_interface.hh"
+#include "../other_modules/Visualizer_App/src/Util/VisualizerWidgetFactory.h"
 
 namespace anothr
 {
@@ -9,6 +11,7 @@ GraphicalUserInterface::GraphicalUserInterface(Glib::RefPtr<Gtk::Builder> refBui
     : playbackController(playbackController), refreshController(refreshController), voiceController(voiceController)
 {
     refBuilder->add_from_file("player.glade");
+    createWidgetsForVisualiser(refBuilder);
     bindGladeWidgetsToVariables(refBuilder);
     createUnbindableWidgets();
 
@@ -111,6 +114,19 @@ void GraphicalUserInterface::createUnbindableWidgets()
     treeviewLibrary->append_column("Position", libraryModel.songPosition);
     treeviewLibrary->append_column("Id", libraryModel.songId);
     treeviewLibrary->append_column("Title", libraryModel.songTitle);
+}
+
+void GraphicalUserInterface::createWidgetsForVisualiser(Glib::RefPtr<Gtk::Builder> refBuilder)
+{
+    Gtk::Notebook *notebook;
+    refBuilder->get_widget("notebook_library_playlist", notebook);
+
+    Gtk::Label visualizer_label("Visualizer");
+    std::unique_ptr<IVisualizer> visualizer_widget = VisualizerWidgetFactory::createBlockVisualizer();
+
+    notebook->append_page(*visualizer_widget, visualizer_label);
+
+    notebook->show_all_children(true);
 }
 
 void GraphicalUserInterface::displayCurrentSongInWindowTitle()

@@ -57,6 +57,7 @@ public:
   void bindGladeWidgetsToVariables(Glib::RefPtr<Gtk::Builder> refBuilder);
   void bindWidgetSignalsToHandlers();
   void createUnbindableWidgets();
+  void createWidgetsForVisualiser(Glib::RefPtr<Gtk::Builder> refBuilder);
   void displayCurrentSongInWindowTitle();
   void nextSong();
   void playMpd();
