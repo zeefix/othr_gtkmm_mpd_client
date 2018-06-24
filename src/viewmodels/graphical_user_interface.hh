@@ -10,6 +10,7 @@
 #include "../controllers/voice_controller.hh"
 
 #include "songlist_columns.hh"
+#include "../other_modules/Visualizer_App/src/Util/VisualizerWidgetFactory.h"
 
 #ifndef ANOTHR_GRAPHICAL_USER_INTERFACE_H
 #define ANOTHR_GRAPHICAL_USER_INTERFACE_H
@@ -32,11 +33,14 @@ private:
   Gtk::Button *buttonStop;
   Gtk::VolumeButton *buttonVolume;
 
+  Gtk::HBox *boxVisualizer;
+  std::unique_ptr<IVisualizer> visualizer;
+
   Gtk::ProgressBar *progressBar;
   Gtk::TreeView *treeviewPlaylist;
   Gtk::TreeView *treeviewLibrary;
 
-  SonglistColumns playlistModel;
+  SonglistColumns songlistColumns;
   SonglistColumns libraryModel;
 
   Glib::RefPtr<Gtk::ListStore> liststorePlaylist;
@@ -57,7 +61,9 @@ public:
   void bindGladeWidgetsToVariables(Glib::RefPtr<Gtk::Builder> refBuilder);
   void bindWidgetSignalsToHandlers();
   void createUnbindableWidgets();
+  void createWidgetsForVisualiser(Glib::RefPtr<Gtk::Builder> refBuilder);
   void displayCurrentSongInWindowTitle();
+  Gtk::Window *getMainWindow();
   void nextSong();
   void playMpd();
   void previousSong();

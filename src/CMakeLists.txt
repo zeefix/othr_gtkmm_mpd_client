@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
 
-file(GLOB_RECURSE source *.cc *.hh *.glade)
+file(GLOB_RECURSE source *.cc *.hh *.cpp *.h *.glade)
 
 configure_file(views/player.glade player.glade COPYONLY)
 file(COPY other_modules/speech_processing DESTINATION ./)
@@ -17,4 +17,7 @@ include_directories(
 
 add_executable(anothrclient ${source})
 
-target_link_libraries(anothrclient ${GTKMM_LIBRARIES} ${PYTHON_LIBRARIES} -lmpdclient )
+target_link_libraries(anothrclient ${GTKMM_LIBRARIES} ${PYTHON_LIBRARIES} -lmpdclient 
+-lfftw3
+-lm
+)

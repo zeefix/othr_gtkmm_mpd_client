@@ -38,9 +38,5 @@ int main(int argc, char **argv)
     anothr::VoiceController voiceController;
     anothr::GraphicalUserInterface gui(refBuilder, playbackController, refreshController, voiceController);
 
-    // TODO gui.getMainWindow()
-    Gtk::Window *mainWindow;
-    refBuilder->get_widget("window_main", mainWindow);
-
-    app->run(*mainWindow);
+    app->run(*gui.getMainWindow());
 }
