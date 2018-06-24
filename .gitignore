@@ -1,4 +1,5 @@
 .vscode
 debug
 release
-src/other_modules/natural_language_interface/configs/configuration.json
+test
+src/other_modules

@@ -2,7 +2,6 @@
 #include <memory>
 
 #include "graphical_user_interface.hh"
-#include "../other_modules/Visualizer_App/src/Util/VisualizerWidgetFactory.h"
 
 namespace anothr
 {
@@ -11,9 +10,9 @@ GraphicalUserInterface::GraphicalUserInterface(Glib::RefPtr<Gtk::Builder> refBui
     : playbackController(playbackController), refreshController(refreshController), voiceController(voiceController)
 {
     refBuilder->add_from_file("player.glade");
-    createWidgetsForVisualiser(refBuilder);
     bindGladeWidgetsToVariables(refBuilder);
     createUnbindableWidgets();
+    createWidgetsForVisualiser(refBuilder);
 
     refreshDisplayedPlaylist();
     refreshDisplayedLibrary();
@@ -37,7 +36,7 @@ void GraphicalUserInterface::addSelectedSongFromLibraryToPlaylist()
 
         // Conversion of songtitle via two "="-statements is necessary, because
         // row[playlistModel.songTitle] is of type "Gtk::TreeValueProxy<Glib::ustring>", and therefore does not contain a method c_str().
-        Glib::ustring songTitleUstring = row[playlistModel.songTitle];
+        Glib::ustring songTitleUstring = row[songlistColumns.songTitle];
         const char *SongTitleCharpointer = songTitleUstring.c_str();
 
         playbackController.addSongToPlaylistViaTitle(SongTitleCharpointer);
@@ -67,6 +66,10 @@ void GraphicalUserInterface::bindGladeWidgetsToVariables(Glib::RefPtr<Gtk::Build
     refBuilder->get_widget("button_volume", buttonVolume);
     refBuilder->get_widget("treeview_playlist", treeviewPlaylist);
     refBuilder->get_widget("treeview_library", treeviewLibrary);
+
+    Gtk::VBox *vbox;
+    refBuilder->get_widget("vbox_main", vbox);
+    refBuilder->get_widget("box_visualizer", boxVisualizer);
 }
 
 /**
@@ -101,32 +104,25 @@ void GraphicalUserInterface::bindWidgetSignalsToHandlers()
  */
 void GraphicalUserInterface::createUnbindableWidgets()
 {
-    liststorePlaylist = Gtk::ListStore::create(playlistModel);
-    liststoreLibrary = Gtk::ListStore::create(libraryModel);
+    liststorePlaylist = Gtk::ListStore::create(songlistColumns);
+    liststoreLibrary = Gtk::ListStore::create(songlistColumns);
 
     treeviewPlaylist->set_model(liststorePlaylist);
     treeviewLibrary->set_model(liststoreLibrary);
 
-    treeviewPlaylist->append_column("Position", playlistModel.songPosition);
-    treeviewPlaylist->append_column("Id", playlistModel.songId);
-    treeviewPlaylist->append_column("Title", playlistModel.songTitle);
+    treeviewPlaylist->append_column("Position", songlistColumns.songPosition);
+    treeviewPlaylist->append_column("Id", songlistColumns.songId);
+    treeviewPlaylist->append_column("Title", songlistColumns.songTitle);
 
-    treeviewLibrary->append_column("Position", libraryModel.songPosition);
-    treeviewLibrary->append_column("Id", libraryModel.songId);
-    treeviewLibrary->append_column("Title", libraryModel.songTitle);
+    treeviewLibrary->append_column("Position", songlistColumns.songPosition);
+    treeviewLibrary->append_column("Id", songlistColumns.songId);
+    treeviewLibrary->append_column("Title", songlistColumns.songTitle);
 }
 
 void GraphicalUserInterface::createWidgetsForVisualiser(Glib::RefPtr<Gtk::Builder> refBuilder)
 {
-    Gtk::Notebook *notebook;
-    refBuilder->get_widget("notebook_library_playlist", notebook);
-
-    Gtk::Label visualizer_label("Visualizer");
-    std::unique_ptr<IVisualizer> visualizer_widget = VisualizerWidgetFactory::createBlockVisualizer();
-
-    notebook->append_page(*visualizer_widget, visualizer_label);
-
-    notebook->show_all_children(true);
+    visualizer = VisualizerWidgetFactory::createBlockVisualizer(2048, "/tmp/mpd.fifo", false);
+    boxVisualizer->add(*visualizer);
 }
 
 void GraphicalUserInterface::displayCurrentSongInWindowTitle()
@@ -135,6 +131,13 @@ void GraphicalUserInterface::displayCurrentSongInWindowTitle()
 
     Glib::ustring songTitle = Glib::ustring(currentSong.uri);
     mainWindow->set_title(songTitle + " [Anothr]");
+
+    visualizer->show_all();
+}
+
+Gtk::Window *GraphicalUserInterface::getMainWindow()
+{
+    return mainWindow;
 }
 
 void GraphicalUserInterface::nextSong()
@@ -166,9 +169,9 @@ void GraphicalUserInterface::refreshDisplayedLibrary()
         auto row = *iter;
 
         // Benutze die TreeModelColumn<entsprechenderTyp> mit dem . Operator
-        row[libraryModel.songTitle] = librarySongs[i].uri;
-        row[libraryModel.songId] = librarySongs[i].id;
-        row[libraryModel.songPosition] = librarySongs[i].position;
+        row[songlistColumns.songTitle] = librarySongs[i].uri;
+        row[songlistColumns.songId] = librarySongs[i].id;
+        row[songlistColumns.songPosition] = librarySongs[i].position;
     }
 }
 
@@ -183,9 +186,9 @@ void GraphicalUserInterface::refreshDisplayedPlaylist()
         auto row = *iter;
 
         // Use the TreeModelColumn<appropriateType> with the "."-operator
-        row[playlistModel.songTitle] = songsInfo[i].uri;
-        row[playlistModel.songId] = songsInfo[i].id;
-        row[playlistModel.songPosition] = songsInfo[i].position;
+        row[songlistColumns.songTitle] = songsInfo[i].uri;
+        row[songlistColumns.songId] = songsInfo[i].id;
+        row[songlistColumns.songPosition] = songsInfo[i].position;
     }
 }
 
@@ -199,7 +202,7 @@ void GraphicalUserInterface::removeSelectedSongFromPlaylist()
     {
         Gtk::TreeModel::Row row = *selectedIterator;
 
-        playbackController.removeSongFromPlaylistAtPosition(row[playlistModel.songPosition]);
+        playbackController.removeSongFromPlaylistAtPosition(row[songlistColumns.songPosition]);
         refreshDisplayedPlaylist();
         displayCurrentSongInWindowTitle();
     }
